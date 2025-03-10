@@ -1,35 +1,27 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
-import Home from './components/Home'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react';
-import Todo from './models/todo.model';
+import Home from './pages/Home'
+import Contact from './pages/Contact'
+import About from './pages/About'
+import Layout from './shared/layouts/Layout'
+import ManagerLayout from './shared/layouts/ManagerLayout'
+import Dashboard from './pages/Dashboard'
 
 function App() {
-  const [todos, setTodos] = useState<Todo[]>([
-    { id: 1, title: 'Learn React', completed: false },
-    { id: 2, title: 'Learn TypeScript', completed: false },
-    { id: 3, title: 'Learn TailwindCSS', completed: false },
-  ]);
 
-  const updateData = () => {
-    setTodos([
-      { id: 1, title: 'Learn ReactJS', completed: true },
-      { id: 2, title: 'Learn TS', completed: true },
-      { id: 3, title: 'Learn TailwindCSS', completed: true },
-      { id: 4, title: 'Learn Vite', completed: false },
-    ]);
-  }
 
   return (
-    <main className='text-center'>
-      <button type='button' onClick={updateData}
-        className='p-2 px-4 bg-blue-500 text-white hover:bg-blue-700 cursor-pointer'>
-        Update Todo
-      </button>
-      <Home items={todos} />
-      <FontAwesomeIcon icon={faCoffee} />
-    </main>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Layout><Home /></Layout>} />
+        <Route path='/about' element={<Layout><About /></Layout>} />
+        <Route path='/contact' element={<Layout><Contact /></Layout>} />
+
+        {/* Dashboard */}
+        <Route path='/dashboard' element={<ManagerLayout><Dashboard /></ManagerLayout>} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
