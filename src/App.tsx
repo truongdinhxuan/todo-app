@@ -1,34 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './App.css'
+import Home from './components/Home'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { useState } from 'react';
+import Todo from './models/todo.model';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [todos, setTodos] = useState<Todo[]>([
+    { id: 1, title: 'Learn React', completed: false },
+    { id: 2, title: 'Learn TypeScript', completed: false },
+    { id: 3, title: 'Learn TailwindCSS', completed: false },
+  ]);
+
+  const updateData = () => {
+    setTodos([
+      { id: 1, title: 'Learn ReactJS', completed: true },
+      { id: 2, title: 'Learn TS', completed: true },
+      { id: 3, title: 'Learn TailwindCSS', completed: true },
+      { id: 4, title: 'Learn Vite', completed: false },
+    ]);
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <main className='text-center'>
+      <button type='button' onClick={updateData}
+        className='p-2 px-4 bg-blue-500 text-white hover:bg-blue-700 cursor-pointer'>
+        Update Todo
+      </button>
+      <Home items={todos} />
+      <FontAwesomeIcon icon={faCoffee} />
+    </main>
   )
 }
 
