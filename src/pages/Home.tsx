@@ -1,7 +1,10 @@
+import styles from "./style/stylePages.module.css"
 const Home = () => {
 
     return (
-        <h1>Home</h1>
+        <section className={styles.home}>
+            <h1>Home</h1>
+        </section>
     )
 }
 
